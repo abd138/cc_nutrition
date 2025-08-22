@@ -214,11 +214,15 @@ async function main() {
   ];
 
   for (const food of foods) {
-    await prisma.food.upsert({
+    const existingFood = await prisma.food.findFirst({
       where: { name: food.name },
-      update: {},
-      create: food,
     });
+
+    if (!existingFood) {
+      await prisma.food.create({
+        data: food,
+      });
+    }
   }
 
   console.log("✅ Database seeded successfully!");

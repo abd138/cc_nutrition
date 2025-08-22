@@ -200,7 +200,7 @@ model UserFavorite {
 // Gamification: Achievement system
 model Achievement {
   id          String @id @default(cuid())
-  name        String
+  name        String @unique
   description String
   icon        String
   category    AchievementCategory
