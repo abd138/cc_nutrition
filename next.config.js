@@ -9,9 +9,9 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   
-  // PWA Configuration
+  // Experimental features
   experimental: {
-    appDir: true,
+    // appDir removed - no longer needed in Next.js 14
   },
   
   // For PWA support

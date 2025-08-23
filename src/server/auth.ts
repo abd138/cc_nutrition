@@ -72,6 +72,10 @@ export const authOptions: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
+          hasProfile: false,
+          currentLevel: 1,
+          totalXp: 0,
+          currentStreak: 0,
         };
       },
     }),

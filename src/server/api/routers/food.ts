@@ -11,20 +11,18 @@ export const foodRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
-      // Search foods with case-insensitive partial matching
+      // Search foods with partial matching
       const foods = await ctx.db.food.findMany({
         where: {
           OR: [
             {
               name: {
                 contains: input.query,
-                mode: 'insensitive',
               },
             },
             {
               brand: {
                 contains: input.query,
-                mode: 'insensitive',
               },
             },
           ],
@@ -190,9 +188,16 @@ export const foodRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       return ctx.db.food.create({
         data: {
-          ...input,
+          name: input.name,
+          brand: input.brand,
+          caloriesPer100g: input.caloriesPer100g,
+          proteinPer100g: input.proteinPer100g,
+          carbsPer100g: input.carbsPer100g,
+          fatPer100g: input.fatPer100g,
           fiberPer100g: input.fiberPer100g || 0,
           sugarPer100g: input.sugarPer100g || 0,
+          servingSizeG: input.servingSizeG,
+          servingDesc: input.servingDesc,
           isVerified: false, // User-created foods are not verified
         },
       });
