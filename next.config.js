@@ -3,6 +3,9 @@
  * for Docker builds.
  */
 import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
