@@ -2,6 +2,7 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
+import path from 'path';
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
@@ -12,6 +13,15 @@ const config = {
   // Experimental features
   experimental: {
     // appDir removed - no longer needed in Next.js 14
+  },
+
+  // Webpack config for path aliases
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '~': path.join(__dirname, 'src'),
+    }
+    return config
   },
   
   // For PWA support
