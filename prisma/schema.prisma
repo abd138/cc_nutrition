@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
   // Further reading:
   // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
   // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 // NextAuth.js models
@@ -21,12 +21,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -61,10 +61,10 @@ model User {
 
   // BMAD Profile Extensions
   dateOfBirth   DateTime?
-  gender        Gender?
+  gender        String?
   heightCm      Float?
-  activityLevel ActivityLevel?
-  goalType      GoalType?
+  activityLevel String?
+  goalType      String?
 
   // Calculated targets (from BMAD Nutrition Specialist)
   dailyCalories Int?
@@ -89,26 +89,10 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-enum Gender {
-  MALE
-  FEMALE
-  OTHER
-}
-
-enum ActivityLevel {
-  SEDENTARY
-  LIGHTLY_ACTIVE
-  MODERATELY_ACTIVE
-  VERY_ACTIVE
-  EXTREMELY_ACTIVE
-}
-
-enum GoalType {
-  LOSE_FAT
-  GAIN_MUSCLE
-  MAINTAIN_WEIGHT
-  BODY_RECOMPOSITION
-}
+// Enums converted to strings for SQLite compatibility
+// Gender: "MALE", "FEMALE", "OTHER"
+// ActivityLevel: "SEDENTARY", "LIGHTLY_ACTIVE", "MODERATELY_ACTIVE", "VERY_ACTIVE", "EXTREMELY_ACTIVE"
+// GoalType: "LOSE_FAT", "GAIN_MUSCLE", "MAINTAIN_WEIGHT", "BODY_RECOMPOSITION"
 
 // Weight tracking for BMI and progress
 model UserWeight {
@@ -156,10 +140,10 @@ model FoodEntry {
   id       String    @id @default(cuid())
   userId   String
   foodId   String
-  mealType MealType
+  mealType String
   quantityG Float
   loggedAt DateTime @default(now())
-  date     DateTime @default(now()) @db.Date
+  date     DateTime @default(now())
 
   // Pre-calculated nutrition for performance
   calories Float
@@ -175,12 +159,7 @@ model FoodEntry {
   @@index([date, mealType])
 }
 
-enum MealType {
-  BREAKFAST
-  LUNCH
-  DINNER
-  SNACK
-}
+// MealType: "BREAKFAST", "LUNCH", "DINNER", "SNACK"
 
 // User favorite foods for quick logging
 model UserFavorite {
@@ -203,7 +182,7 @@ model Achievement {
   name        String @unique
   description String
   icon        String
-  category    AchievementCategory
+  category    String
   points      Int    @default(0)
   condition   String // JSON string describing unlock condition
   isActive    Boolean @default(true)
@@ -213,13 +192,7 @@ model Achievement {
   createdAt DateTime @default(now())
 }
 
-enum AchievementCategory {
-  CONSISTENCY
-  MACRO_ACCURACY
-  STREAK
-  MILESTONE
-  SOCIAL
-}
+// AchievementCategory: "CONSISTENCY", "MACRO_ACCURACY", "STREAK", "MILESTONE", "SOCIAL"
 
 // User earned achievements
 model UserAchievement {
@@ -239,7 +212,7 @@ model UserAchievement {
 model DailyNutrition {
   id            String   @id @default(cuid())
   userId        String
-  date          DateTime @db.Date
+  date          DateTime
   totalCalories Float    @default(0)
   totalProtein  Float    @default(0)
   totalCarbs    Float    @default(0)
