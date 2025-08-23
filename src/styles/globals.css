@@ -2,62 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles for mobile-first PWA */
+/* Base styles */
 @layer base {
   html {
-    font-family: var(--font-sans), system-ui, sans-serif;
-    scroll-behavior: smooth;
+    font-family: system-ui, sans-serif;
   }
 
   body {
     @apply bg-gray-50 text-gray-900 antialiased;
-    /* Prevent bounce on iOS */
-    overscroll-behavior-y: none;
-    /* Fix for iOS safe areas */
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
   }
 
-  /* Dark mode support */
   @media (prefers-color-scheme: dark) {
     body {
       @apply bg-gray-900 text-gray-100;
     }
   }
-
-  /* Focus styles for accessibility */
-  :focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
-  }
 }
 
 @layer components {
-  /* Mobile-first button components */
   .btn {
     @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 active:bg-primary-800;
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
   }
 
   .btn-secondary {
@@ -68,126 +36,24 @@
     @apply btn border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-primary-500;
   }
 
-  .btn-ghost {
-    @apply btn border-transparent text-gray-500 bg-transparent hover:text-gray-700 hover:bg-gray-100 focus:ring-primary-500;
-  }
-
-  /* Card component */
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden;
+    @apply bg-white rounded-xl shadow-sm border border-gray-200;
   }
 
   .card-body {
     @apply p-4;
   }
 
-  /* Progress components */
-  .progress-ring {
-    @apply relative inline-flex items-center justify-center;
-  }
-
-  .progress-ring svg {
-    transform: rotate(-90deg);
-  }
-
-  .progress-ring-circle {
-    transition: stroke-dasharray 0.35s;
-    transform-origin: 50% 50%;
-  }
-
-  /* Macro bars */
-  .macro-bar {
-    @apply w-full bg-gray-200 rounded-full h-2 overflow-hidden;
-  }
-
-  .macro-fill {
-    @apply h-full rounded-full transition-all duration-700 ease-out;
-  }
-
-  .macro-fill.protein {
-    @apply bg-red-500;
-  }
-
-  .macro-fill.carbs {
-    @apply bg-blue-500;
-  }
-
-  .macro-fill.fat {
-    @apply bg-yellow-500;
-  }
-
-  /* Achievement badge */
-  .achievement-badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
-  }
-
-  .achievement-earned {
-    @apply achievement-badge bg-green-100 text-green-800;
-  }
-
-  .achievement-locked {
-    @apply achievement-badge bg-gray-100 text-gray-500;
-  }
-
-  /* Mobile navigation */
-  .mobile-nav {
-    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* Food entry components */
   .food-item {
     @apply flex items-center justify-between p-3 border-b border-gray-100 hover:bg-gray-50 transition-colors;
   }
 
-  .meal-section {
-    @apply mb-6;
-  }
-
-  .meal-header {
-    @apply flex items-center justify-between mb-3;
-  }
-
-  .meal-title {
-    @apply text-lg font-semibold text-gray-900;
-  }
-
-  .meal-calories {
-    @apply text-sm text-gray-500;
-  }
-
-  /* Loading states */
   .skeleton {
     @apply animate-pulse bg-gray-200 rounded;
-  }
-
-  .skeleton-text {
-    @apply skeleton h-4 w-full mb-2;
-  }
-
-  .skeleton-avatar {
-    @apply skeleton h-12 w-12 rounded-full;
-  }
-
-  /* PWA specific styles */
-  .pwa-install-prompt {
-    @apply fixed bottom-20 left-4 right-4 bg-primary-600 text-white p-4 rounded-lg shadow-lg z-50;
-  }
-
-  /* Touch feedback */
-  .touch-feedback {
-    @apply transition-transform active:scale-95;
-  }
-
-  /* Floating action button */
-  .fab {
-    @apply fixed bottom-20 right-4 w-14 h-14 bg-primary-600 text-white rounded-full shadow-lg flex items-center justify-center z-40 transition-all hover:scale-110 active:scale-95;
-    bottom: calc(5rem + env(safe-area-inset-bottom));
   }
 }
 
 @layer utilities {
-  /* Hide scrollbar but keep functionality */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -195,139 +61,5 @@
   
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
-  }
-
-  /* Safe area utilities */
-  .safe-top {
-    padding-top: env(safe-area-inset-top);
-  }
-
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .safe-left {
-    padding-left: env(safe-area-inset-left);
-  }
-
-  .safe-right {
-    padding-right: env(safe-area-inset-right);
-  }
-
-  /* Animation utilities */
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.3s ease-out;
-  }
-
-  .animate-bounce-gentle {
-    animation: bounceGentle 2s infinite;
-  }
-
-  .animate-pulse-soft {
-    animation: pulseSoft 2s infinite;
-  }
-
-  /* Text utilities */
-  .text-balance {
-    /* text-wrap: balance; - Not supported in all browsers/build systems */
-  }
-
-  /* Grid utilities for responsive design */
-  .grid-auto-fit {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
-  .grid-auto-fill {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-}
-
-/* Keyframe animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes bounceGentle {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes pulseSoft {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-/* Progress ring animations */
-@keyframes progressRing {
-  0% {
-    stroke-dasharray: 0 628;
-  }
-  100% {
-    stroke-dasharray: var(--progress) 628;
-  }
-}
-
-/* Responsive design breakpoints */
-@media (min-width: 640px) {
-  .container {
-    max-width: 480px;
-    margin: 0 auto;
-  }
-}
-
-/* Print styles */
-@media print {
-  .no-print {
-    display: none !important;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .card {
-    @apply border-2 border-gray-900;
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
