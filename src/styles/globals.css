@@ -233,7 +233,7 @@
 
   /* Text utilities */
   .text-balance {
-    text-wrap: balance;
+    /* text-wrap: balance; - Not supported in all browsers/build systems */
   }
 
   /* Grid utilities for responsive design */
