@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Head from "next/head";
 
-import LoadingScreen from "~/components/LoadingScreen";
-import WelcomeScreen from "~/components/WelcomeScreen";
-import Dashboard from "~/components/Dashboard";
+import LoadingScreen from "../components/LoadingScreen";
+import WelcomeScreen from "../components/WelcomeScreen";
+import Dashboard from "../components/Dashboard";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
