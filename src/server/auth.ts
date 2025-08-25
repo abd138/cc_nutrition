@@ -62,6 +62,11 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: PrismaAdapter(db),
+  // Force canonical domain for OAuth callbacks
+  ...(env.NODE_ENV === "production" && {
+    redirectProxyUrl: "https://nutrition-tracker-zeta.vercel.app/api/auth",
+    trustHost: true,
+  }),
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID ?? "",
