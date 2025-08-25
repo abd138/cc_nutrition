@@ -8,8 +8,8 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import DiscordProvider from "next-auth/providers/discord";
 
-import { env } from "~/env.js";
-import { db } from "~/server/db";
+import { env } from "../env.js";
+import { db } from "./db";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`

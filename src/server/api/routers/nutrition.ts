@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure, profileSetupProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure, profileSetupProcedure } from "../trpc";
 import { MealType } from "@prisma/client";
 
 export const nutritionRouter = createTRPCRouter({

@@ -1,13 +1,5 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "framework": "nextjs",
-  "installCommand": "npm install",
-  "devCommand": "npm run dev",
   "functions": {
-    "app/**": {
-      "maxDuration": 30
-    },
     "pages/api/**": {
       "maxDuration": 30
     }
@@ -20,15 +12,6 @@
   ],
   "headers": [
     {
-      "source": "/sw.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    },
-    {
       "source": "/(.*)",
       "headers": [
         {
@@ -40,12 +23,6 @@
           "value": "nosniff"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/healthz",
-      "destination": "/api/health"
     }
   ]
 }

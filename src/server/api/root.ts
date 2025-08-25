@@ -1,9 +1,9 @@
-import { postRouter } from "~/server/api/routers/post";
-import { profileRouter } from "~/server/api/routers/profile";
-import { nutritionRouter } from "~/server/api/routers/nutrition";
-import { foodRouter } from "~/server/api/routers/food";
-import { achievementRouter } from "~/server/api/routers/achievement";
-import { createTRPCRouter } from "~/server/api/trpc";
+import { postRouter } from "./routers/post";
+import { profileRouter } from "./routers/profile";
+import { nutritionRouter } from "./routers/nutrition";
+import { foodRouter } from "./routers/food";
+import { achievementRouter } from "./routers/achievement";
+import { createTRPCRouter } from "./trpc";
 
 /**
  * This is the primary router for your server.
